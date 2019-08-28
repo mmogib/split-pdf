@@ -1,7 +1,7 @@
 {
-  "name": "split-pdf",
+  "name": "@mmogib/split-pdf",
   "description": "A command line to split a pdf file into multiple files. Make sure you have python>3.6 available in your path.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Mohammed Alshahrani @mmogib",
   "bin": {
     "split-pdf": "./bin/run"

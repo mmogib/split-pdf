@@ -5,19 +5,14 @@ import chalk from "chalk";
 import { Spinner } from "cli-spinner";
 const log = console.log;
 
+const cwd = process.cwd();
 export const split = () => {
-  const pdfFiles: filePath[] = getPathsForSpecificExtensions(
-    "/home/mohammed/Documents/testPdfTesting",
-    [".pdf"]
-  );
+  const pdfFiles: filePath[] = getPathsForSpecificExtensions(cwd, [".pdf"]);
   if (pdfFiles.length === 0) {
     log(chalk.bgRed("No input pdf files found"));
     process.exit();
   }
-  const csvFiles = getPathsForSpecificExtensions(
-    "/home/mohammed/Documents/testPdfTesting",
-    [".csv", ".txt"]
-  );
+  const csvFiles = getPathsForSpecificExtensions(cwd, [".csv", ".txt"]);
 
   const paretFolder: string = pdfFiles[0].parent;
 
