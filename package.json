@@ -1,7 +1,7 @@
 {
   "name": "@mmogib/split-pdf",
   "description": "A command line to split a pdf file into multiple files. Make sure you have python>3.6 available in your path.",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "author": "Mohammed Alshahrani @mmogib",
   "bin": {
     "split-pdf": "./bin/run"
@@ -64,7 +64,7 @@
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "tslint -p test -t stylish",
-    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "prepack": "rm -rf lib && tsc -b && cp src/split.py lib && oclif-dev manifest && oclif-dev readme",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif-dev readme && git add README.md",
     "dev": "nodemon --watch src --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/app.ts",
