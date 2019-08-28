@@ -1,38 +1,58 @@
 import os
+import sys
+from math import ceil
 import shutil
+
 
 from PyPDF2 import PdfFileReader, PdfFileWriter, PdfFileMerger
 import csv
 
-# /grades/${code}/${term}/${code}_${term}_${student_id}_${path_part}.pdf`;
+
+def split(src, dist,  names, numPages):
+    output = PdfFileWriter()
+    page = 0
+    for name in names:
+        for k in range(numPages):
+            output.addPage(src.getPage(page+k))
+        with open(f'{dist}/{name}', "wb") as outputStream:
+            output.write(outputStream)
+        page += numPages
 
 
-def split(filePath, courseFolder, termFolder, gradeName, numPages=2):
-    folder = f'{courseFolder}/{termFolder}'
-    shutil.rmtree(f'{courseFolder}', ignore_errors=True)
-    inputFile = open(filePath, "rb")
-    os.mkdir(f'{courseFolder}')
-    os.mkdir(folder)
-    input1 = PdfFileReader(inputFile)
-    with open("./data/activestudents.csv", "r") as read_file:
+if len(sys.argv) < 5:
+    raise Exception('Missing arguments.. ')
+
+src = sys.argv[1]
+dist = sys.argv[2]
+numPages = int(sys.argv[3])
+namesCSV = sys.argv[4]
+
+
+inputFile = open(src, "rb")
+inputPdf = PdfFileReader(inputFile)
+total = inputPdf.getNumPages()
+numOfDocs = total / numPages
+
+if numOfDocs != ceil(numOfDocs):
+    raise Exception(
+        f'Number of pages in the pdf file ({total}) is not divisible by {numPages}.')
+
+names = []
+if namesCSV != "":
+    with open(namesCSV, 'r') as read_file:
         data = csv.reader(read_file)
-        line = 0
         for row in data:
-            output = PdfFileWriter()
-            for k in range(int(numPages)):
-                output.addPage(input1.getPage(line+k))
-            with open(f'{folder}/{courseFolder}_{termFolder}_{row[0]}_{gradeName}.pdf', "wb") as outputStream:
-                output.write(outputStream)
-            line += int(numPages)
+            names.append(f'{row[0]}.pdf')
+else:
+    counter = 1
+    for doc in range(0, total, numPages):
+        names.append(f'document_{counter}.pdf')
+        counter += 1
+
+if len(names) != numOfDocs:
+    raise Exception(
+        f'The number of names {len(names)} is not equal to the number of documents extracted ({int(numOfDocs)}).')
 
 
-""" output = PdfFileWriter()
-    output.addPage(input1.getPage(i))
-    merger.merge()
-    with open("document-page%s.pdf" % i, "wb") as outputStream:
-        output.write(outputStream)
-with open("data_file.json", "r") as read_file:
-    data = json.load(read_file)
-
-    "ROmm0uk_Gq0AAAAAAABEN5soXtmhsqzgLVlJDa3TB_aRQpC5bO7cLuUxdr7TkYjR"
- """
+split(inputPdf, dist,  names, numPages)
+print("...")

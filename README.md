@@ -1,5 +1,4 @@
-split-pdf
-=========
+# split-pdf
 
 A command line to split a pdf file into multiple files
 
@@ -9,10 +8,13 @@ A command line to split a pdf file into multiple files
 [![License](https://img.shields.io/npm/l/split-pdf.svg)](https://github.com/mmogib/split-pdf/blob/master/package.json)
 
 <!-- toc -->
+* [split-pdf](#split-pdf)
 * [Usage](#usage)
 * [Commands](#commands)
 <!-- tocstop -->
+
 # Usage
+
 <!-- usage -->
 ```sh-session
 $ npm install -g split-pdf
@@ -26,10 +28,13 @@ USAGE
 ...
 ```
 <!-- usagestop -->
+
 # Commands
+
 <!-- commands -->
 * [`split-pdf hello [FILE]`](#split-pdf-hello-file)
 * [`split-pdf help [COMMAND]`](#split-pdf-help-command)
+* [`split-pdf start [FILE]`](#split-pdf-start-file)
 
 ## `split-pdf hello [FILE]`
 
@@ -67,4 +72,20 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.1/src/commands/help.ts)_
+
+## `split-pdf start [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ split-pdf start [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/start.ts](https://github.com/mmogib/split-pdf/blob/v0.0.1/src/commands/start.ts)_
 <!-- commandsstop -->
