@@ -16,7 +16,7 @@ $ npm install -g @mmogib/split-pdf
 $ split-pdf COMMAND
 running command...
 $ split-pdf (-v|--version|version)
-@mmogib/split-pdf/0.0.2 linux-x64 node-v11.14.0
+@mmogib/split-pdf/0.1.0 linux-x64 node-v11.14.0
 $ split-pdf --help [COMMAND]
 USAGE
   $ split-pdf COMMAND
@@ -59,5 +59,5 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/start.ts](https://github.com/mmogib/split-pdf/blob/v0.0.2/src/commands/start.ts)_
+_See code: [src/commands/start.ts](https://github.com/mmogib/split-pdf/blob/v0.1.0/src/commands/start.ts)_
 <!-- commandsstop -->
