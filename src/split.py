@@ -9,9 +9,9 @@ import csv
 
 
 def split(src, dist,  names, numPages):
-    output = PdfFileWriter()
     page = 0
     for name in names:
+        output = PdfFileWriter()
         for k in range(numPages):
             output.addPage(src.getPage(page+k))
         with open(f'{dist}/{name}', "wb") as outputStream:
