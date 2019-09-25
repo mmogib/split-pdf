@@ -26,6 +26,8 @@ src = sys.argv[1]
 dist = sys.argv[2]
 numPages = int(sys.argv[3])
 namesCSV = sys.argv[4]
+prefix = sys.argv[5]
+suffix = sys.argv[6]
 
 
 inputFile = open(src, "rb")
@@ -42,11 +44,11 @@ if namesCSV != "":
     with open(namesCSV, 'r') as read_file:
         data = csv.reader(read_file)
         for row in data:
-            names.append(f'{row[0]}.pdf')
+            names.append(f'{prefix}{row[0]}{suffix}.pdf')
 else:
     counter = 1
     for doc in range(0, total, numPages):
-        names.append(f'document_{counter}.pdf')
+        names.append(f'{prefix}document_{counter}{suffix}.pdf')
         counter += 1
 
 if len(names) != numOfDocs:

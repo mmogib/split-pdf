@@ -40,7 +40,8 @@ export const split = () => {
         "new",
         ...csvFiles.map((pth: filePath) => pth.basename + pth.ext)
       ],
-      message: "choose the source of naming your output files.",
+      message:
+        "choose the source (csv or txt) of naming your output files (one column with no header).",
       filter: v =>
         v === "new"
           ? ""
@@ -55,6 +56,18 @@ export const split = () => {
         "type the string that will be used for naming your output files.",
       default: "output",
       when: answers => answers["dataFile"] === ""
+    },
+    {
+      name: "outputNamePrefix",
+      type: "input",
+      message: "type the prefix of to be used in naming your split pdf files.",
+      default: "output_"
+    },
+    {
+      name: "outputNameSuffix",
+      type: "input",
+      message: "type the suffix of to be used in naming your split pdf files.",
+      default: ""
     },
     {
       name: "outputDir",
@@ -77,12 +90,22 @@ export const split = () => {
   ];
 
   prompt(questions).then(
-    async ({ inputFile, dataFile, outputDir, numPages, csvUserDefined }) => {
+    async ({
+      inputFile,
+      dataFile,
+      outputDir,
+      numPages,
+      csvUserDefined,
+      outputNamePrefix,
+      outputNameSuffix
+    }) => {
       const opts: fileOptions = {
         inputFile,
         dataFile: csvUserDefined === "new" ? "" : dataFile,
         outputDir,
-        numPages
+        numPages,
+        outputNamePrefix,
+        outputNameSuffix
       };
       const spinner = new Spinner(
         chalk.magentaBright("%s Your file is being split. Please wait ...")

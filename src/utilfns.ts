@@ -10,13 +10,22 @@ export type fileOptions = {
   dataFile: string;
   outputDir: string[];
   numPages: string;
+  outputNamePrefix: string;
+  outputNameSuffix: string;
 };
 
 export const init = async (opts: fileOptions): Promise<string> => {
   const outputDirStr = opts.outputDir[opts.outputDir.length - 1];
   const options: Options = {
     mode: "text",
-    args: [opts.inputFile, outputDirStr, opts.numPages, opts.dataFile] //
+    args: [
+      opts.inputFile,
+      outputDirStr,
+      opts.numPages,
+      opts.dataFile,
+      opts.outputNamePrefix,
+      opts.outputNameSuffix
+    ] //
   };
   return new Promise(async (resolve, reject) => {
     try {
